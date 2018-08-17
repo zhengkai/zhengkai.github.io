@@ -9,14 +9,7 @@ cp /tmp/sudoers_nopassword /etc/sudoers.d/nopassword
 
 if [ "$USER" == 'root' ]; then
 
-	apt install pwgen
-
-	PASSWD=`pwgen 12 1`
-	echo $PASSWD > ~/pwd.txt
-	chmod 600 ~/pwd.txt
-
 	adduser --disabled-password --gecos "" zhengkai
-	# echo -e "$PASSWD\n$PASSWD" | passwd zhengkai
 
 	adduser zhengkai sudo
 
