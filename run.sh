@@ -4,6 +4,9 @@ wget http://zhengkai.github.io/authorized_keys -O /tmp/authorized_keys
 cp /tmp/authorized_keys ~/.ssh/authorized_keys
 chmod 644 ~/.ssh/authorized_keys
 
+wget https://raw.githubusercontent.com/zhengkai/config/master/file/sudoers_nopassword -O /tmp/sudoers_nopassword
+cp /tmp/sudoers_nopassword /etc/sudoers.d/nopassword
+
 if [ "$USER" == 'root' ]; then
 
 	apt install pwgen
@@ -13,7 +16,7 @@ if [ "$USER" == 'root' ]; then
 	chmod 600 ~/pwd.txt
 
 	adduser --disabled-password --gecos "" zhengkai
-	echo -e "$PASSWD\n$PASSWD" | passwd zhengkai
+	# echo -e "$PASSWD\n$PASSWD" | passwd zhengkai
 
 	adduser zhengkai sudo
 
