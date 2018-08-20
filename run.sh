@@ -5,7 +5,7 @@ cp /tmp/authorized_keys ~/.ssh/authorized_keys
 chmod 644 ~/.ssh/authorized_keys
 
 wget https://raw.githubusercontent.com/zhengkai/config/master/file/sudoers_nopassword -O /tmp/sudoers_nopassword
-cp /tmp/sudoers_nopassword /etc/sudoers.d/nopassword
+sudo cp /tmp/sudoers_nopassword /etc/sudoers.d/nopassword
 
 if [ "$USER" == 'root' ]; then
 
@@ -39,7 +39,7 @@ git clone https://github.com/zhengkai/vimrc.git ~/.vim
 mkdir -p ~/.tmp/vim-undo
 cd ~/.vim
 git submodule update --init --recursive
-vim +PlugInstall +qall
+vim +PlugInstall +qall || :
 
 sudo chsh -s /bin/zsh zhengkai
 
