@@ -21,7 +21,7 @@ if [ "$USER" == 'root' ]; then
 	exit
 fi
 
-sudo apt install -y vim git wget
+sudo apt install -y vim git wget rng-tools
 
 mkdir -p ~/.ssh
 
