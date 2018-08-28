@@ -33,17 +33,22 @@ git clone https://github.com/zhengkai/config.git ~/conf
 
 ~/conf/apt/aptget.sh
 
-~/conf/link.sh
-
-git clone https://github.com/zhengkai/vimrc.git ~/.vim
-mkdir -p ~/.tmp/vim-undo
-cd ~/.vim
-git submodule update --init --recursive
-vim +PlugInstall +qall || :
-
 sudo chsh -s /bin/zsh zhengkai
 
 git clone https://github.com/zhengkai/build.git ~/build
 ~/build/rc-local/install.sh
 
 sudo cp ~/build/shadowsocks/20-shadowsocks.conf /etc/sysctl.d/
+
+~/conf/link.sh
+
+~/build/bbr/run.sh || :
+
+git clone https://github.com/zhengkai/vimrc.git ~/.vim
+mkdir -p ~/.tmp/vim-undo
+cd ~/.vim
+git submodule update --init --recursive
+
+sudo chown -R zhengkai:zhengkai ~/
+
+vim +PlugInstall +qall || :
