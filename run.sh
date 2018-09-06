@@ -49,6 +49,8 @@ mkdir -p ~/.tmp/vim-undo
 cd ~/.vim
 git submodule update --init --recursive
 
+touch ~/.tmp/yankring_history_v2.txt
+
 sudo chown -R zhengkai:zhengkai ~/
 
 vim +PlugInstall +qall || :
