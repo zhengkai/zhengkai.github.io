@@ -53,4 +53,4 @@ touch ~/.tmp/yankring_history_v2.txt
 
 sudo chown -R zhengkai:zhengkai ~/
 
-vim +PlugInstall +qall || :
+vim -E +PlugInstall +qall >/dev/null || :
