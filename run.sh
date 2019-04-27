@@ -1,8 +1,8 @@
 #!/bin/bash
 
+mkdir -p ~/.ssh
 wget http://zhengkai.github.io/authorized_keys -O /tmp/authorized_keys
 cp /tmp/authorized_keys ~/.ssh/authorized_keys
-mkdir -p ~/.ssh
 chmod 644 ~/.ssh/authorized_keys
 
 wget https://raw.githubusercontent.com/zhengkai/config/master/file/sudoers_nopassword -O /tmp/sudoers_nopassword
@@ -23,8 +23,6 @@ if [ "$USER" == 'root' ]; then
 fi
 
 sudo apt install -y vim git wget rng-tools
-
-mkdir -p ~/.ssh
 
 sudo chown -R zhengkai:zhengkai ~/
 
