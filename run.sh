@@ -5,8 +5,8 @@ wget http://zhengkai.github.io/authorized_keys -O /tmp/authorized_keys
 cp /tmp/authorized_keys ~/.ssh/authorized_keys
 chmod 644 ~/.ssh/authorized_keys
 
-wget https://raw.githubusercontent.com/zhengkai/config/master/file/sudoers_nopassword -O /tmp/sudoers_nopassword
-sudo cp /tmp/sudoers_nopassword /etc/sudoers.d/nopassword
+wget https://raw.githubusercontent.com/zhengkai/config/master/file/sudoers-nopassword -O /tmp/sudoers-nopassword
+sudo cp /tmp/sudoers-nopassword /etc/sudoers.d/nopassword
 
 if [ "$USER" == 'root' ]; then
 
