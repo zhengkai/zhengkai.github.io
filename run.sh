@@ -1,14 +1,24 @@
 #!/bin/bash
 
-mkdir -p ~/.ssh
-wget http://zhengkai.github.io/authorized_keys -O /tmp/authorized_keys
-cp /tmp/authorized_keys ~/.ssh/authorized_keys
-chmod 644 ~/.ssh/authorized_keys
+chown_home() {
+	sudo chown -R "${USER}:${USER}" "$HOME"
+}
 
-wget https://raw.githubusercontent.com/zhengkai/config/master/file/sudoers-nopassword -O /tmp/sudoers-nopassword
-sudo cp /tmp/sudoers-nopassword /etc/sudoers.d/nopassword
+SSH_AUTH="${HOME}/.ssh/authorized_keys"
+echo mkdir -p "$(dirname "$SSH_AUTH")"
+touch "$SSH_AUTH"
+chmod 644 "$SSH_AUTH"
+if ! grep -q 'zhengkai@Tesla' "$SSH_AUTH"
+then
+	curl -s --fail https://zhengkai.github.io/authorized_keys > /tmp/authorized_keys || ( >&2 echo get authorized_keys fail && exit 1)
+	cat /tmp/authorized_keys >> "$SSH_AUTH"
+fi
 
-if [ "$USER" == 'root' ]; then
+if [ ! -e "/etc/sudoers.d/nopassword" ]; then
+	echo '%sudo   ALL=(ALL:ALL) NOPASSWD: ALL' | sudo tee /etc/sudoers.d/nopassword
+fi
+
+if [ "$USER" == 'root' ] || [ "$USER" == 'ubuntu' ]; then
 
 	adduser --disabled-password --gecos "" zhengkai
 
@@ -22,9 +32,15 @@ if [ "$USER" == 'root' ]; then
 	exit
 fi
 
+if ! id | grep -q '(sudo)'
+then
+	>&2 echo no sudo
+	exit 1
+fi
+
 sudo apt install -y vim git wget rng-tools
 
-sudo chown -R zhengkai:zhengkai ~/
+chown_home
 
 git clone https://github.com/zhengkai/config.git ~/conf
 
@@ -50,6 +66,6 @@ git submodule update --init --recursive
 
 touch ~/.tmp/yankring_history_v2.txt
 
-sudo chown -R zhengkai:zhengkai ~/
+chown_home
 
 vim -E +PlugInstall +qall >/dev/null || :
