@@ -5,7 +5,7 @@ chown_home() {
 }
 
 SSH_AUTH="${HOME}/.ssh/authorized_keys"
-echo mkdir -p "$(dirname "$SSH_AUTH")"
+mkdir -p "${HOME}/.ssh"
 touch "$SSH_AUTH"
 chmod 644 "$SSH_AUTH"
 if ! grep -q 'zhengkai@Tesla' "$SSH_AUTH"
@@ -18,7 +18,7 @@ if [ ! -e "/etc/sudoers.d/nopassword" ]; then
 	echo '%sudo   ALL=(ALL:ALL) NOPASSWD: ALL' | sudo tee /etc/sudoers.d/nopassword
 fi
 
-if [ "$USER" == 'root' ] || [ "$USER" == 'ubuntu' ]; then
+if [ "$USER" != 'zhengkai' ]; then
 
 	adduser --disabled-password --gecos "" zhengkai
 
@@ -61,8 +61,7 @@ sudo cp ~/build/shadowsocks/20-shadowsocks.conf /etc/sysctl.d/
 
 git clone https://github.com/zhengkai/vimrc.git ~/.vim
 mkdir -p ~/.tmp/vim-undo
-cd ~/.vim
-git submodule update --init --recursive
+cd ~/.vim && git submodule update --init --recursive
 
 touch ~/.tmp/yankring_history_v2.txt
 
