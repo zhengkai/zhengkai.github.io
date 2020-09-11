@@ -10,7 +10,7 @@ touch "$SSH_AUTH"
 chmod 644 "$SSH_AUTH"
 if ! grep -q 'zhengkai@Tesla' "$SSH_AUTH"
 then
-	curl -s --fail https://zhengkai.github.io/authorized_keys > /tmp/authorized_keys || ( >&2 echo get authorized_keys fail && exit 1)
+	curl -s --fail https://zhengkai.github.io/authorized_keys -o /tmp/authorized_keys || ( >&2 echo get authorized_keys fail && exit 1)
 	cat /tmp/authorized_keys >> "$SSH_AUTH"
 fi
 
@@ -20,14 +20,14 @@ fi
 
 if [ "$USER" != 'zhengkai' ]; then
 
-	adduser --disabled-password --gecos "" zhengkai
+	sudo adduser --disabled-password --gecos "" zhengkai
 
-	adduser zhengkai sudo
+	sudo adduser zhengkai sudo
 
-	mkdir -p /home/zhengkai/.ssh
-	cp ~/.ssh/authorized_keys /home/zhengkai/.ssh/authorized_keys
+	sudo mkdir -p /home/zhengkai/.ssh
+	sudo cp ~/.ssh/authorized_keys /home/zhengkai/.ssh/authorized_keys
 
-	chown -R zhengkai:zhengkai /home/zhengkai
+	sudo chown -R zhengkai:zhengkai /home/zhengkai
 
 	exit
 fi
