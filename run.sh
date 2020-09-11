@@ -42,7 +42,7 @@ sudo apt install -y vim git wget rng-tools
 
 chown_home
 
-git clone https://github.com/zhengkai/config.git ~/conf
+git clone --depth 1 https://github.com/zhengkai/conf.git ~/conf
 
 ~/conf/script/update-ubuntu.sh
 
@@ -50,7 +50,7 @@ git clone https://github.com/zhengkai/config.git ~/conf
 
 sudo chsh -s /bin/zsh zhengkai
 
-git clone https://github.com/zhengkai/build.git ~/build
+git clone --depth 1 https://github.com/zhengkai/build.git ~/build
 ~/build/rc-local/install.sh
 
 sudo cp ~/build/shadowsocks/20-shadowsocks.conf /etc/sysctl.d/
@@ -59,7 +59,7 @@ sudo cp ~/build/shadowsocks/20-shadowsocks.conf /etc/sysctl.d/
 
 ~/build/bbr/run.sh || :
 
-git clone https://github.com/zhengkai/vimrc.git ~/.vim
+git clone --depth 1 https://github.com/zhengkai/vimrc.git ~/.vim
 mkdir -p ~/.tmp/vim-undo
 cd ~/.vim && git submodule update --init --recursive
 
