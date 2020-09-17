@@ -44,7 +44,7 @@ chown_home
 
 git clone --depth 1 https://github.com/zhengkai/conf.git ~/conf
 
-~/conf/script/update-ubuntu.sh
+~/conf/update/ubuntu.sh
 
 ~/conf/apt/aptget.sh
 
