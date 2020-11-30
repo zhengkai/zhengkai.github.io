@@ -8,7 +8,7 @@ SSH_AUTH="${HOME}/.ssh/authorized_keys"
 mkdir -p "${HOME}/.ssh"
 touch "$SSH_AUTH"
 chmod 644 "$SSH_AUTH"
-if ! grep -q 'zhengkai@Tesla' "$SSH_AUTH"
+if ! grep -q 'zhengkai@Freya' "$SSH_AUTH"
 then
 	curl -s --fail https://zhengkai.github.io/authorized_keys -o /tmp/authorized_keys || ( >&2 echo get authorized_keys fail && exit 1)
 	cat /tmp/authorized_keys >> "$SSH_AUTH"
