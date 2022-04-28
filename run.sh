@@ -46,9 +46,11 @@ git clone --depth 1 https://github.com/zhengkai/conf.git ~/conf
 
 ~/conf/update/ubuntu.sh
 
-~/conf/apt/aptget.sh
+~/conf/apt/aptget.sh || exit 1
 
-sudo chsh -s /bin/zsh zhengkai
+if [ -x /bin/zsh ]; then
+	sudo chsh -s /bin/zsh zhengkai
+fi
 
 git clone --depth 1 https://github.com/zhengkai/build.git ~/build
 ~/build/rc-local/install.sh
