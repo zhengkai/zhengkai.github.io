@@ -4,12 +4,16 @@ chown_home() {
 	sudo chown -R "${USER}:${USER}" "$HOME"
 }
 
+if ! id | grep -q '(sudo)'; then
+	>&2 echo no sudo
+	exit 1
+fi
+
 SSH_AUTH="${HOME}/.ssh/authorized_keys"
 mkdir -p "${HOME}/.ssh"
 touch "$SSH_AUTH"
 chmod 644 "$SSH_AUTH"
-if ! grep -q 'zhengkai@Anna' "$SSH_AUTH"
-then
+if ! grep -q 'zhengkai@Anna' "$SSH_AUTH"; then
 	curl -s --fail https://zhengkai.github.io/authorized_keys -o /tmp/authorized_keys || ( >&2 echo get authorized_keys fail && exit 1)
 	cat /tmp/authorized_keys >> "$SSH_AUTH"
 fi
@@ -30,12 +34,6 @@ if [ "$USER" != 'zhengkai' ]; then
 	sudo chown -R zhengkai:zhengkai /home/zhengkai
 
 	exit
-fi
-
-if ! id | grep -q '(sudo)'
-then
-	>&2 echo no sudo
-	exit 1
 fi
 
 sudo apt install -y vim git wget rng-tools
@@ -62,10 +60,7 @@ sudo cp ~/build/shadowsocks/20-shadowsocks.conf /etc/sysctl.d/
 ~/build/bbr/run.sh || :
 
 git clone --depth 1 https://github.com/zhengkai/vimrc.git ~/.vim
-mkdir -p ~/.tmp/vim-undo
 cd ~/.vim && git submodule update --init --recursive
-
-touch ~/.tmp/yankring_history_v2.txt
 
 chown_home
 
