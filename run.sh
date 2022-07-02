@@ -36,11 +36,11 @@ if [ "$USER" != 'zhengkai' ]; then
 	exit
 fi
 
-sudo apt install -y vim git wget rng-tools
+sudo apt install -y vim git wget rng-tools net-tools
 
 chown_home
 
-git clone --depth 1 https://github.com/zhengkai/conf.git ~/conf
+git clone --depth 1 https://github.com/zhengkai/conf.git ~/conf || exit 1
 
 ~/conf/update/ubuntu.sh
 
