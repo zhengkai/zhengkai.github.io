@@ -1,5 +1,7 @@
 #!/bin/bash
 
+ACCOUNT="zhengkai"
+
 chown_home() {
 	sudo chown -R "${USER}:${USER}" "$HOME"
 }
@@ -22,16 +24,16 @@ if [ ! -e "/etc/sudoers.d/nopassword" ]; then
 	echo '%sudo   ALL=(ALL:ALL) NOPASSWD: ALL' | sudo tee /etc/sudoers.d/nopassword
 fi
 
-if [ "$USER" != 'zhengkai' ]; then
+if [ "$USER" != "$ACCOUNT" ]; then
 
-	sudo adduser --disabled-password --gecos "" zhengkai
+	sudo adduser --disabled-password --gecos "" "$ACCOUNT"
 
-	sudo adduser zhengkai sudo
+	sudo adduser "$ACCOUNT" sudo
 
-	sudo mkdir -p /home/zhengkai/.ssh
-	sudo cp ~/.ssh/authorized_keys /home/zhengkai/.ssh/authorized_keys
+	sudo mkdir -p "/home/${ACCOUNT}/.ssh"
+	sudo cp ~/.ssh/authorized_keys "/home/${ACCOUNT}/.ssh/authorized_keys"
 
-	sudo chown -R zhengkai:zhengkai /home/zhengkai
+	sudo chown -R "${ACCOUNT}:${ACCOUNT}" "/home/${ACCOUNT}"
 
 	exit
 fi
@@ -40,17 +42,17 @@ sudo apt install -y vim git wget rng-tools net-tools
 
 chown_home
 
-git clone --depth 1 https://github.com/zhengkai/conf.git ~/conf || exit 1
+git clone --depth 1 "https://github.com/${ACCOUNT}/conf.git" ~/conf || exit 1
 
 ~/conf/update/ubuntu.sh
 
 ~/conf/apt/aptget.sh || exit 1
 
 if [ -x /bin/zsh ]; then
-	sudo chsh -s /bin/zsh zhengkai
+	sudo chsh -s /bin/zsh "$ACCOUNT"
 fi
 
-git clone --depth 1 https://github.com/zhengkai/build.git ~/build
+git clone --depth 1 "https://github.com/${ACCOUNT}/build.git" ~/build
 ~/build/rc-local/install.sh
 
 sudo cp ~/build/shadowsocks/20-shadowsocks.conf /etc/sysctl.d/
@@ -59,7 +61,7 @@ sudo cp ~/build/shadowsocks/20-shadowsocks.conf /etc/sysctl.d/
 
 ~/build/bbr/run.sh || :
 
-git clone --depth 1 https://github.com/zhengkai/vimrc.git ~/.vim
+git clone --depth 1 "https://github.com/${ACCOUNT}/vimrc.git" ~/.vim
 cd ~/.vim && git submodule update --init --recursive
 
 chown_home
