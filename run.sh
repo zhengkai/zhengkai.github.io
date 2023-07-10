@@ -71,5 +71,3 @@ fi
 cd ~/.vim && git submodule update --init --recursive
 
 chown_home
-
-vim -E +PlugInstall +qall >/dev/null || :
