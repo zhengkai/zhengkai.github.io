@@ -58,6 +58,7 @@ if [ ! -e ~/build ]; then
 	git clone --depth 1 "https://github.com/${ACCOUNT}/build.git" ~/build
 fi
 ~/build/rc-local/install.sh
+~/build/tty/autologin.sh
 
 sudo cp ~/build/shadowsocks/20-shadowsocks.conf /etc/sysctl.d/
 
