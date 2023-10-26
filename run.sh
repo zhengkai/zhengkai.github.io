@@ -43,7 +43,7 @@ sudo apt install -y vim git wget rng-tools net-tools
 chown_home
 
 if [ ! -e ~/conf ]; then
-	git clone --depth 1 "https://github.com/${ACCOUNT}/conf.git" ~/conf || exit 1
+	git clone --depth 1 "https://github.com/zhengkai/conf.git" ~/conf || exit 1
 fi
 
 ~/conf/update/ubuntu.sh
@@ -55,7 +55,7 @@ if [ -x /bin/zsh ]; then
 fi
 
 if [ ! -e ~/build ]; then
-	git clone --depth 1 "https://github.com/${ACCOUNT}/build.git" ~/build
+	git clone --depth 1 "https://github.com/zhengkai/build.git" ~/build
 fi
 ~/build/rc-local/install.sh
 ~/build/tty/autologin.sh
@@ -67,7 +67,7 @@ sudo cp ~/build/shadowsocks/20-shadowsocks.conf /etc/sysctl.d/
 ~/build/bbr/run.sh || :
 
 if [ ! -e ~/.vim ]; then
-	git clone --depth 1 "https://github.com/${ACCOUNT}/vimrc.git" ~/.vim
+	git clone --depth 1 "https://github.com/zhengkai/vimrc.git" ~/.vim
 fi
 cd ~/.vim && git submodule update --init --recursive
 
