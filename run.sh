@@ -46,6 +46,11 @@ if [ ! -e ~/conf ]; then
 	git clone --depth 1 "https://github.com/zhengkai/conf.git" ~/conf || exit 1
 fi
 
+mkdir -p ~/.config
+if [ ! -f ~/.config/env ]; then
+	cp ~/conf/misc/env ~/.config/env
+fi
+
 ~/conf/update/ubuntu.sh
 
 ~/conf/apt/aptget.sh || exit 1
