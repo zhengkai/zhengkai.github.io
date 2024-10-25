@@ -71,9 +71,8 @@ sudo cp ~/build/shadowsocks/20-shadowsocks.conf /etc/sysctl.d/
 
 ~/build/bbr/run.sh || :
 
-if [ ! -e ~/.vim ]; then
-	git clone --depth 1 "https://github.com/zhengkai/vimrc.git" ~/.vim
+if ! locale -a | grep -q "en_US.UTF-8"; then
+	sudo locale-gen en_US.UTF-8
 fi
-cd ~/.vim && git submodule update --init --recursive
 
 chown_home
