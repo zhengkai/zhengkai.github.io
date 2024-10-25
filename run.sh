@@ -71,7 +71,7 @@ sudo cp ~/build/shadowsocks/20-shadowsocks.conf /etc/sysctl.d/
 
 ~/build/bbr/run.sh || :
 
-if ! locale -a | grep -q "en_US.UTF-8"; then
+if ! locale -a | grep -q "en_US.utf8"; then
 	sudo locale-gen en_US.UTF-8
 fi
 
