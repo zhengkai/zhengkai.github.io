@@ -38,7 +38,7 @@ if [ "$USER" != "$ACCOUNT" ]; then
 	exit
 fi
 
-sudo apt install -y vim git wget rng-tools net-tools
+sudo apt install -y acl vim git wget rng-tools net-tools ifstat
 
 chown_home
 
