@@ -2,6 +2,8 @@
 
 ACCOUNT="zhengkai"
 
+export DEBIAN_FRONTEND=noninteractive
+
 chown_home() {
 	sudo chown -R "${USER}:${USER}" "$HOME"
 }
@@ -55,10 +57,6 @@ fi
 
 ~/conf/apt/aptget.sh || exit 1
 
-if [ -x /bin/zsh ]; then
-	sudo chsh -s /bin/zsh "$ACCOUNT"
-fi
-
 if [ ! -e ~/build ]; then
 	git clone --depth 1 "https://github.com/zhengkai/build.git" ~/build
 fi
@@ -68,6 +66,10 @@ fi
 sudo cp ~/build/shadowsocks/20-shadowsocks.conf /etc/sysctl.d/
 
 ~/conf/link.sh
+
+if [ -x /bin/zsh ]; then
+	sudo chsh -s /bin/zsh "$ACCOUNT"
+fi
 
 ~/build/bbr/run.sh || :
 
