@@ -67,8 +67,8 @@ sudo cp ~/build/shadowsocks/20-shadowsocks.conf /etc/sysctl.d/
 
 ~/conf/link.sh
 
-if [ -x /bin/zsh ]; then
-	sudo chsh -s /bin/zsh "$ACCOUNT"
+if [ -x /usr/bin/zsh ]; then
+	sudo chsh -s /usr/bin/zsh "$ACCOUNT"
 fi
 
 ~/build/bbr/run.sh || :
