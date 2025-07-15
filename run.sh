@@ -8,9 +8,11 @@ chown_home() {
 	sudo chown -R "${USER}:${USER}" "$HOME"
 }
 
-if ! id | grep -q '(sudo)'; then
-	>&2 echo no sudo
-	exit 1
+if [ "$UID" -ne 0 ]; then
+	if ! id | grep -q '(sudo)'; then
+		>&2 echo no sudo
+		exit 1
+	fi
 fi
 
 SSH_AUTH="${HOME}/.ssh/authorized_keys"
