@@ -42,6 +42,9 @@ if [ "$USER" != "$ACCOUNT" ]; then
 	exit
 fi
 
+sudo apt -y -q update
+sudo apt -y -q -o Dpkg::Options::="--force-confnew" dist-upgrade
+
 sudo apt install -y acl vim git wget rng-tools net-tools ifstat
 
 chown_home
