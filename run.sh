@@ -42,6 +42,8 @@ if [ "$USER" != "$ACCOUNT" ]; then
 	exit
 fi
 
+echo "iperf3 iperf3/start_daemon boolean true" | sudo debconf-set-selections
+
 sudo apt -y -q update
 sudo apt -y -q -o Dpkg::Options::="--force-confnew" dist-upgrade
 
